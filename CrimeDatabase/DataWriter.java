@@ -1,5 +1,5 @@
 package CrimeDatabase;
 
-public class DataBaseDriver {
+public class DataWriter {
     
 }
