@@ -1,0 +1,12 @@
+[
+    {
+        "id":1,
+        "name":"John Doe",
+        "age":32,
+        "Weight":132,
+        "height":"5'9",
+        "birthday":"07/15/1989",
+        "DL#":75315946,
+        "crime":"misdemeanor"
+    }
+]

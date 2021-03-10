@@ -1,0 +1,10 @@
+[
+    {
+        "id":1,
+        "name":"Officer Bob",
+        "age":40,
+        "badgeID":123456789,
+        "username":"Bob",
+        "password":"132abc"
+    }
+]
