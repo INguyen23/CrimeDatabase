@@ -17,7 +17,7 @@ public class DataLoader extends DataConstants {
         JSONParser parser = new JSONParser();
         JSONArray officersJSON = (JSONArray)new JSONParser().parse(reader);
 
-        for(int i=0;i<officersJSON.size();i++) {
+        for (int i = 0 ; i < officersJSON.size(); i++) {
             JSONObject officerJSON = (JSONObject)officersJSON.get(i);
             String name = (String)officerJSON.get(OFFICER_NAME);
             int age = (int)officerJSON.get(OFFICER_AGE);
