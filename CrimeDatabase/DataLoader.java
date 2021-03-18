@@ -21,8 +21,8 @@ public class DataLoader extends DataConstants {
             JSONObject officerJSON = (JSONObject)officersJSON.get(i);
             String name = (String)officerJSON.get(OFFICER_NAME);
             int age = (int)officerJSON.get(OFFICER_AGE);
-
-            officers.add(new Officer(name, age));
+            int arrests = (int)officerJSON.get(OFFICER_ARRESTS);
+            officers.add(new Officer(name, age, arrests));
         }
 
         return officers;

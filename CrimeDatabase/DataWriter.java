@@ -31,6 +31,7 @@ public class DataWriter extends DataConstants {
         JSONObject officerDetails = new JSONObject();
         officerDetails.put(OFFICER_NAME, officer.getName());
         officerDetails.put(OFFICER_AGE, officer.getAge());
+        officerDetails.put(OFFICER_ARRESTS, officer.getArrests());
 
         return officerDetails;
     }

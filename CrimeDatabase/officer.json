@@ -3,6 +3,7 @@
         "id":1,
         "name":"Officer Bob",
         "age":40,
+        "arrests":5,
         "badgeID":123456789,
         "username":"Bob",
         "password":"132abc"
