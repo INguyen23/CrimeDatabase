@@ -3,9 +3,9 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.*;
   
-public class Login extends JFrame implements ActionListener
+public class Login extends JFrame  implements ActionListener
  {
-
+    Driver access = new Driver();
     JButton SUBMIT;
     JPanel panel;
     JLabel label1,label2;
@@ -39,14 +39,9 @@ public class Login extends JFrame implements ActionListener
     }
     public void actionPerformed(ActionEvent ae)
     {
-        ret[0] = text1.getText();
-        ret[1] = text2.getText();
-        entered = true;
-        if (this.verifyCredentials(ret[0],ret[1])) {
-            //NextPage page=new NextPage();
-            /*page.setVisible(true);
-            JLabel label = new JLabel("Welcome:"+value1);
-            page.getContentPane().add(label);*/
+        if (access.verifyCredentials(text1.getText(),text2.getText())) 
+        {
+            System.out.println("Welcome");
         }
         else {
             System.out.println("enter the valid username and password");
@@ -54,6 +49,7 @@ public class Login extends JFrame implements ActionListener
             "Error",JOptionPane.ERROR_MESSAGE);
         }
     }
+    
  }
   
  

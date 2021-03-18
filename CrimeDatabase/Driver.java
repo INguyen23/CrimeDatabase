@@ -3,14 +3,16 @@ package CrimeDatabase;
 import java.util.ArrayList;
 import javax.swing.*;
 import java.awt.*;
+import java.awt.event.*;
 
 
-public class Driver extends JFrame{
+public class Driver extends JFrame {
     private static String accessLevel;
     private static ArrayList<Case> cases;
     private static ArrayList<String> users;
     private static ArrayList<String> pass;
     private static ArrayList<String> accessLevels;
+    private static Login loginFrame;
 
     private void editInfo() {
 
@@ -60,9 +62,10 @@ public class Driver extends JFrame{
             pass = new ArrayList<String>();
             cases = new ArrayList<Case>();
             addCredentials("admin","admin","admin");
-            Login frame=new Login();
-            frame.setSize(300,100);
-            frame.setVisible(true);
+            loginFrame=new Login();
+            loginFrame.setSize(300,300);
+            loginFrame.setVisible(true);
+            loginFrame.logins();
         }
         catch(Exception e)
         {
