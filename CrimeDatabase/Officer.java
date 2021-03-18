@@ -1,6 +1,6 @@
 package CrimeDatabase;
 
-public class Officer {
+public class Officer extends Person{
     private String name;
     private int age;
 
