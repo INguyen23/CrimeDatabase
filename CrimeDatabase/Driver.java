@@ -1,12 +1,15 @@
 package CrimeDatabase;
 
 import java.util.ArrayList;
+import java.util.Scanner;
+
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.*;
 
 
 public class Driver extends JFrame {
+    private Scanner scanner;
     private static String accessLevel;
     private static ArrayList<Case> cases;
     private static ArrayList<String> users;
@@ -14,16 +17,32 @@ public class Driver extends JFrame {
     private static ArrayList<String> accessLevels;
     private static Login loginFrame;
 
+    public Driver() {
+        scanner = new Scanner(System.in);
+    }
+
     private void editInfo() {
 
     }
 
     private void seachCases() {
-
+        System.out.println("Search through cases: ");
+        String input = scanner.next();
+        
+        for(Case case : cases) {
+            if (cases.getId().equalsIgnoreCase(input) || cases.getLevel().equalsIgnoreCase(input) || cases.getSubject.equalsIgnoreCase(input) 
+            || cases.getDate().equalsIgnoreCase(input) || cases.getEvidence().equalsIgnoreCase(input) || cases.getDescription().equalsIgnoreCase(input)) { 
+                return case;
+            }
+        }   
     }
 
-    private void addCase() {
-
+    private boolean addCase() {
+        System.out.println("Would you like to add a new case (Y/N)?");
+        String input = scanner.next();
+        
+        if(input.toLowerCase().equals("y")) return true;
+        return false;
     }
 
     public static boolean verifyCredentials(String user, String pswd) {
