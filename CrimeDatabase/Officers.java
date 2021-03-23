@@ -3,8 +3,8 @@ package CrimeDatabase;
 import java.util.ArrayList;
 
 public class Officers {
-    private static Officers officers;
-    private ArrayList<Officer> officerList;
+    private static Officers officers = null;
+    private ArrayList<Officer> officerList = new ArrayList<Officer>();
 
     private Officers() { 
         officerList = DataLoader.loadOfficers();
@@ -21,8 +21,8 @@ public class Officers {
         return officerList;
     }
 
-    public void addOfficer(String name, int age) { 
-        officerList.add(new Officer(name,age));
+    public void addOfficer(int ID, String userName, String pass, String name, int age, String badgeID) { 
+        officerList.add(new Officer( ID,  userName,  pass,  name,  age,  badgeID));
         DataWriter.saveOfficers();
     }
 }

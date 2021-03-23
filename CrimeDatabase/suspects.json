@@ -1,32 +1,33 @@
 [
     {
         "id":1,
-        "name":"John Doe",
-        "age":32,
-        "Weight":132,
-        "height":"5'9",
-        "birthday":"07/15/1989",
-        "DL#":75315946,
-        "crime":"misdemeanor"
-    },
-    {
+        "name":"Aizen",
+        "age":37,
+        "sex":"male",
+        "weight":147,
+        "height":"5'10",
+        "eyecolor":"brown",
+        "haircolor":"black",
+        "description":"wears hat"
+    },{
         "id":2,
-        "name":"Jerry Johns",
-        "age":28,
-        "Weight":182,
-        "height":"6'0",
-        "birthday":"02/05/1993",
-        "DL#":84521364,
-        "crime":"felony"
-    },
-    {
+        "name":"Jerry",
+        "age":25,
+        "sex":"male",
+        "weight":189,
+        "height":"6'3",
+        "eyecolor":"blue",
+        "haircolor":"blonde",
+        "description":"butterfly tattoo"
+    },{
         "id":3,
-        "name":"Corey Kennedy",
-        "age":48,
-        "Weight":176,
-        "height":"5'11",
-        "birthday":"10/26/1978",
-        "DL#":53953541,
-        "crime":"infraction"
+        "name":"Janie",
+        "age":57,
+        "sex":"female",
+        "weight":121,
+        "height":"5'4",
+        "eyecolor":"green",
+        "haircolor":"brown",
+        "description":"scar on left leg"
     }
 ]
