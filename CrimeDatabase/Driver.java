@@ -26,14 +26,14 @@ public class Driver extends JFrame {
 
     }
 
-    private void seachCases() {
+    private Case seachCases() {
         System.out.println("Search through cases: ");
         String input = scanner.next();
         
-        for(Case case : cases) {
-            if (cases.getId().equalsIgnoreCase(input) || cases.getLevel().equalsIgnoreCase(input) || cases.getSubject.equalsIgnoreCase(input) 
-            || cases.getDate().equalsIgnoreCase(input) || cases.getEvidence().equalsIgnoreCase(input) || cases.getDescription().equalsIgnoreCase(input)) { 
-                return case;
+        for(Case case1 : cases) {
+            if ((""+case1.getId()).equalsIgnoreCase(input) || (case1.getLevel().getcrimeType()).equalsIgnoreCase(input) || (case1.getSubject().getName()).equalsIgnoreCase(input) 
+            || case1.getDate().equalsIgnoreCase(input) || case1.getEvidence().contains(input) || case1.getDescription().equalsIgnoreCase(input)) { 
+                return case1;
             }
         }   
     }
@@ -75,8 +75,10 @@ public class Driver extends JFrame {
     }
 
     public void toMain(){
+        mainFrame = new Main();
         loginFrame.setVisible(false);
         mainFrame.setVisible(true);
+        mainFrame.setSize(500,500);
     }
     public static void main(String [] args) {
         try
