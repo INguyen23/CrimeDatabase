@@ -9,29 +9,39 @@ public class Case {
     private Evidence [] evidence;
     private String description;
 
-    public void setId() {
+    public Case() {
+    	
+    }
+    public void setId(int id) {
+    	this.id = id;
+    }
+    
+    public void setLevel(Crime level) {
+    	this.level = level; 
+    }
+
+    public void setSubject(Person subject) {
+    	this.subject = subject; 
+    }
+
+    public void setDate(String Date) {
+    	this.date = Date; 
+
+    }
+
+    public void setDescription(String description) {
+    	this.description = description; 
+
+    }
+
+    public void setEvidence(Evidence[] evidence) {
+    	this.evidence = evidence;
 
     }
     
-    public void setLevel() {
-
-    }
-
-    public void setSubject() {
-
-    }
-
-    public void setDate() {
-
-    }
-
-    public void setDescription() {
-
-    }
-
-    public void setEvidence() {
-
-    }
+	public void setArrestingOfficer(Person arrestingOfficer) {
+		this.arrestingOfficer = arrestingOfficer;
+	}
 
     public int getId() {
         return id;
@@ -56,4 +66,8 @@ public class Case {
     public Evidence [] getEvidence() {
         return evidence;
     }
+
+	public Person getArrestingOfficer() {
+		return arrestingOfficer;
+	}
 }
