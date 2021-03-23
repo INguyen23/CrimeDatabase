@@ -1,5 +1,27 @@
 [
     {
+<<<<<<< HEAD
+            "id":1,
+            "username":"nguyeni",
+            "password":"abc123",
+            "name":"Ivon Nguyen",
+            "age":22,
+            "badgeID":"159461581"
+    },{
+            "id":2,
+            "username":"annguyen",
+            "password":"happie",
+            "name":"Angel Nguyen",
+            "age":20,
+            "badgeID":"75648911"
+    },{
+            "id":3,
+            "username":"jsmith",
+            "password":"cheese",
+            "name":"John Smith",
+            "age":42,
+            "badgeID":"78945612"
+=======
         "id":1,
         "name":"Officer Bob",
         "age":40,
@@ -23,5 +45,6 @@
         "badgeID":456789123,
         "username":"GJohnson",
         "password":"abc123"
+>>>>>>> b13d771b5bc3363c091a418d6c0fb21368dbcb28
     }
 ]

@@ -1,20 +1,30 @@
 [
     {
-        "userID":1,
-        "susID":1,
-        "date":"03/10/2020",
-        "description": "shoplifting"
-    },
-    {
-        "userID":2,
-        "susID":3,
-        "date":"07/14/2020",
-        "description": "speeding"
-    },
-    {
+        "subjectID":1,
         "userID":3,
-        "susID":2,
-        "date":"08/26/2020",
-        "description": "murder"
+        "level":"infraction",
+        "date":"01/15/2020",
+        "evidence":"none",
+        "witnesses":"Mary Jane, Steph Curry",
+        "victimInfo":"none",
+        "description":"speeding 25+"
+    },{
+        "subjectID":2,
+        "userID":1,
+        "level":"misdemeanor",
+        "date":"07/25/2008",
+        "evidence":"fingerprints",
+        "witnesses":"John Meyer",
+        "victimInfo":"none",
+        "description":"vandalism"
+    },{
+        "subjectID":3,
+        "userID":2,
+        "level":"felony",
+        "date":"11/30/2010",
+        "evidence":"knife, fingerprints",
+        "witnesses":"John Cena, Jerry Allen",
+        "victimInfo":"Marry Anne, female, blonde hair, blue eyes",
+        "description":"Murder"
     }
 ]
