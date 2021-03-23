@@ -26,16 +26,23 @@ public class Driver extends JFrame {
 
     }
 
-    private Case seachCases() {
+    public Case seachCases(String input) {
         System.out.println("Search through cases: ");
-        String input = scanner.next();
+        //String input = scanner.next();
         
         for(Case case1 : cases) {
+            boolean containsEvidence = false;
+            for(Evidence evidence1 : case1.getEvidence()) {
+                if(evidence1.getDescription().equalsIgnoreCase(input)){
+                    containsEvidence = true;
+                }
+            }
             if ((""+case1.getId()).equalsIgnoreCase(input) || (case1.getLevel().getcrimeType()).equalsIgnoreCase(input) || (case1.getSubject().getName()).equalsIgnoreCase(input) 
-            || case1.getDate().equalsIgnoreCase(input) || case1.getEvidence().contains(input) || case1.getDescription().equalsIgnoreCase(input)) { 
+            || case1.getDate().equalsIgnoreCase(input) || containsEvidence || case1.getDescription().equalsIgnoreCase(input)) { 
                 return case1;
             }
-        }   
+        }
+        return null;   
     }
 
     private boolean addCase() {
