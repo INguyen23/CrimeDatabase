@@ -21,8 +21,8 @@ public class Officers {
         return officerList;
     }
 
-    public void addOfficer(String name, int age, int arrest) { 
-        officerList.add(new Officer(name,age,arrest));
+    public void addOfficer(String name, int age) { 
+        officerList.add(new Officer(name,age));
         DataWriter.saveOfficers();
     }
 }
