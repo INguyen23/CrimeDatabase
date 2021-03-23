@@ -13,6 +13,7 @@ public class Driver extends JFrame {
     private static ArrayList<String> pass;
     private static ArrayList<String> accessLevels;
     private static Login loginFrame;
+    private static Main mainFrame;
 
     private void editInfo() {
 
@@ -54,6 +55,10 @@ public class Driver extends JFrame {
         
     }
 
+    public void toMain(){
+        loginFrame.setVisible(false);
+        mainFrame.setVisible(true);
+    }
     public static void main(String [] args) {
         try
         {
@@ -73,3 +78,4 @@ public class Driver extends JFrame {
         }
     }
 }
+

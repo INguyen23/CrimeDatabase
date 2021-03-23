@@ -8,27 +8,25 @@ public class Login extends JFrame  implements ActionListener
     Driver access = new Driver();
     JButton SUBMIT;
     JPanel panel;
-    JLabel label1,label2;
-    final JTextField  text1,text2;
-    boolean entered = false;
-    String [] ret = {"",""};
+    JLabel userLabel,passLabel;
+    final JTextField  userText,passText;
     public Login()
     {
-        label1 = new JLabel();
-        label1.setText("Username:");
-        text1 = new JTextField(15);
+        userLabel = new JLabel();
+        userLabel.setText("Username:");
+        userText = new JTextField(15);
  
-        label2 = new JLabel();
-        label2.setText("Password:");
-        text2 = new JPasswordField(15);
+        passLabel = new JLabel();
+        passLabel.setText("Password:");
+        passText = new JPasswordField(15);
   
         SUBMIT=new JButton("SUBMIT");
    
         panel=new JPanel(new GridLayout(3,1));
-        panel.add(label1);
-        panel.add(text1);
-        panel.add(label2);
-        panel.add(text2);
+        panel.add(userLabel);
+        panel.add(userText);
+        panel.add(passLabel);
+        panel.add(passText);
         panel.add(SUBMIT);
     }
     public void logins(){
@@ -39,9 +37,11 @@ public class Login extends JFrame  implements ActionListener
     }
     public void actionPerformed(ActionEvent ae)
     {
-        if (access.verifyCredentials(text1.getText(),text2.getText())) 
+        if (access.verifyCredentials(userText.getText(),passText.getText())) 
         {
-            System.out.println("Welcome");
+            JOptionPane.showMessageDialog(this,"Welcome",
+            "Login Success",JOptionPane.INFORMATION_MESSAGE);
+            access.toMain();
         }
         else {
             System.out.println("enter the valid username and password");
