@@ -3,7 +3,18 @@
         "userID":1,
         "susID":1,
         "date":"03/10/2020",
+        "description": "shoplifting"
+    },
+    {
+        "userID":2,
+        "susID":3,
+        "date":"07/14/2020",
         "description": "speeding"
+    },
+    {
+        "userID":3,
+        "susID":2,
+        "date":"08/26/2020",
+        "description": "murder"
     }
-
 ]
