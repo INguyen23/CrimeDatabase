@@ -23,11 +23,11 @@ public class Driver extends JFrame {
         scanner = new Scanner(System.in);
     }
 
-    private void editInfo() {
+    protected void editInfo() {
 
     }
 
-    public Case seachCases(String input) {
+    protected Case searchCases(String input) {
         System.out.println("Search through cases: ");
         //String input = scanner.next();
         
@@ -46,7 +46,7 @@ public class Driver extends JFrame {
         return null;   
     }
 
-    private boolean addCase() {
+    protected boolean addCase() {
         System.out.println("Would you like to add a new case (Y/N)?");
         String input = scanner.next();
         
@@ -54,7 +54,7 @@ public class Driver extends JFrame {
         return false;
     }
 
-    public static boolean verifyCredentials(String user, String pswd) {
+    protected static boolean verifyCredentials(String user, String pswd) {
         if(users.contains(user)&&pass.contains(pswd)) {
             if(users.indexOf(user)==users.indexOf(pswd)){
                 accessLevel = accessLevels.get(users.indexOf(user));
@@ -64,7 +64,7 @@ public class Driver extends JFrame {
         return false;
     }
 
-    private void editCase() {
+    protected void editCase() {
         ListIterator<Case> iterator = list.listIterator();
         System.out.println("Enter the case number you would like to edit: ");
         int input = scanner.nextInt();
@@ -119,18 +119,20 @@ public class Driver extends JFrame {
         }
     }
 
-    private void removeCase() {
-
+    protected void removeCase(String idNumber) {
+        cases.remove(this.searchCases(""+idNumber));
     }
 
-    private static void addCredentials(String user, String pswd, String level) {
+    protected static void addCredentials(String user, String pswd, String level) {
         users.add(user);
         pass.add(level);
         accessLevels.add(level);
     }
 
-    private void editCredentials() {
-        
+    protected void editCredentials(String user, String pswd, String level) {
+        int index = users.indexOf(user);
+        pass.set(index, pswd);
+        accessLevels.set(index, level);
     }
 
     public void toMain(){
