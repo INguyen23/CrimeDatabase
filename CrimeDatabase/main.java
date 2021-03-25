@@ -2,6 +2,7 @@ package CrimeDatabase;
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.*;
+import java.util.ArrayList;
 
 public class Main extends JFrame  implements ActionListener
 {
@@ -47,6 +48,32 @@ public class Main extends JFrame  implements ActionListener
     JLabel editPassLabel;
     JLabel editAccessLabel;
     JButton editCredSubmit;
+    //Add Case Buttons
+    JTextField caseId;
+    JTextField crimeLevel;
+    JTextField subjectName;
+    JTextField subjectAge;
+    JTextField arrestingOfficerName;
+    JTextField arrestingOfficerAge;
+    JTextField arrestingOfficerArrests;
+    JTextField date;
+    ArrayList <JTextField> evidenceType;
+    ArrayList <JTextField> evidenceDescription;
+    int evidenceCounter = 1;
+    JTextField description;
+    JLabel labelcaseId;
+    JLabel labelcrimeLevel;
+    JLabel labelsubjectName;
+    JLabel labelsubjectAge;
+    JLabel labelarrestingOfficerName;
+    JLabel labelarrestingOfficerAge;
+    JLabel labelarrestingOfficerArrests;
+    JLabel labeldate;
+    JLabel labelevidenceType;
+    JLabel labelevidenceDescription;
+    JLabel labeldescription;
+    JButton addEvidence;
+    JButton addCaseSubmit;
     
     public Main()
     {
@@ -91,13 +118,29 @@ public class Main extends JFrame  implements ActionListener
         caseDeleteSubmit.addActionListener(this);
 
         searchPanel=new JPanel();
-        addCasePanel = new JPanel();
         editCasePanel = new JPanel();
 
         editCredentialsPanel = new JPanel();
         editCredSubmit = new JButton("Submit");
         editCredSubmit.setActionCommand("Edit Cred Submit");
         editCredSubmit.addActionListener(this);
+
+        addCasePanel = new JPanel();
+        addCaseSubmit = new JButton("Submit");
+        addCaseSubmit.setActionCommand("Add Case Submit");
+        addCaseSubmit.addActionListener(this);
+        addEvidence = new JButton("More Evidence");
+        addEvidence.setActionCommand("Add Evidence Submit");
+        addEvidence.addActionListener(this);
+
+        panel.setVisible(true);
+        searchPanel.setVisible(false);
+        addCasePanel.setVisible(false);
+        editCasePanel.setVisible(false);
+        deleteCasePanel.setVisible(false);
+        addCredentialsPanel.setVisible(false);
+        editCredentialsPanel.setVisible(false);
+        add(panel);
     }
 
     public void actionPerformed(ActionEvent ae) {
@@ -135,9 +178,6 @@ public class Main extends JFrame  implements ActionListener
 
         if(ae.getActionCommand().equals("Back")){
             panel.setVisible(true);
-            remove(searchPanel);
-            remove(addCredentialsPanel);
-            add(panel);
             
             panel.setVisible(true);
             searchPanel.setVisible(false);
@@ -182,6 +222,32 @@ public class Main extends JFrame  implements ActionListener
             access.editCredentials(editUser.getText(), editPass.getText(), editLevel.getText());
         }
 
+        if(ae.getActionCommand().equals("Add a Case")){
+            searchPanel.setVisible(false);
+            addCasePanel.setVisible(true);
+            editCasePanel.setVisible(false);
+            deleteCasePanel.setVisible(false);
+            addCredentialsPanel.setVisible(false);
+            editCredentialsPanel.setVisible(false);
+            addCase();
+        }
+    
+        if(ae.getActionCommand().equals("Add Evidence Submit")){
+            evidenceType.add(new JTextField());
+            evidenceDescription.add(new JTextField());
+            evidenceCounter=evidenceType.size()-1;
+            addCasePanel.remove(addCaseSubmit);
+            addCasePanel.remove(back);
+            addCasePanel.remove(addEvidence);
+            addCasePanel.add(labelevidenceType);
+            addCasePanel.add(evidenceType.get(evidenceCounter));
+            addCasePanel.add(labelevidenceDescription);
+            addCasePanel.add(evidenceDescription.get(evidenceCounter));
+            addCasePanel.add(addEvidence);
+            addCasePanel.add(addCaseSubmit);
+            addCasePanel.add(back);
+            addCasePanel.updateUI();
+        }
     }
 
     private void search()
@@ -255,5 +321,72 @@ public class Main extends JFrame  implements ActionListener
         editCredentialsPanel.add(editCredSubmit);
         editCredentialsPanel.add(back);
         add(editCredentialsPanel);
+    }
+
+    private void addCase(){
+        caseId = new JTextField(15);
+        crimeLevel = new JTextField(15);
+        subjectName = new JTextField(15);
+        subjectAge = new JTextField(15);
+        arrestingOfficerName = new JTextField(15);
+        arrestingOfficerAge = new JTextField(15);
+        arrestingOfficerArrests = new JTextField(15);
+        date = new JTextField(15);
+        description = new JTextField(45);
+        evidenceType = new ArrayList <JTextField>();
+        evidenceDescription = new ArrayList <JTextField>();
+        evidenceType.add(new JTextField(15));
+        evidenceDescription.add(new JTextField(15));
+        labelcaseId = new JLabel();
+        labelcrimeLevel = new JLabel();
+        labelsubjectName = new JLabel();
+        labelsubjectAge = new JLabel();
+        labelarrestingOfficerName = new JLabel();
+        labelarrestingOfficerAge = new JLabel();
+        labelarrestingOfficerArrests = new JLabel();
+        labeldate = new JLabel();
+        labelevidenceType = new JLabel();
+        labelevidenceDescription = new JLabel();
+        labeldescription = new JLabel();
+        labelcaseId.setText("New Case ID Number: ");
+        labelcrimeLevel.setText("New Case Crime Level: ");
+        labelsubjectName.setText("New Case Subject Name: ");
+        labelsubjectAge.setText("New Case Subject Age: ");
+        labelarrestingOfficerName.setText("New Case Arresting Officer Name: ");
+        labelarrestingOfficerAge.setText("New Case Arresting Officer Age: ");
+        labelarrestingOfficerArrests.setText("New Case Arresting Officer Arrests: ");
+        labeldate.setText("New Case Date: ");
+        labelevidenceType.setText("New Case Evidence Type: ");
+        labelevidenceDescription.setText("New Case Evidence Description: ");
+        labeldescription.setText("New Case Description: ");
+        addCasePanel.setLayout(new GridLayout(14,2));
+        addCasePanel.add(labelcaseId);
+        addCasePanel.add(caseId);
+        addCasePanel.add(labelcrimeLevel);
+        addCasePanel.add(crimeLevel);
+        addCasePanel.add(labeldate);
+        addCasePanel.add(date);
+        addCasePanel.add(labeldescription);
+        addCasePanel.add(description);
+        addCasePanel.add(labelsubjectName);
+        addCasePanel.add(subjectName);
+        addCasePanel.add(labelsubjectAge);
+        addCasePanel.add(subjectAge);
+        addCasePanel.add(labelarrestingOfficerName);
+        addCasePanel.add(arrestingOfficerName);
+        addCasePanel.add(labelarrestingOfficerAge);
+        addCasePanel.add(arrestingOfficerAge);
+        addCasePanel.add(labelarrestingOfficerArrests);
+        addCasePanel.add(arrestingOfficerArrests);
+        for(int i = 0; i<evidenceCounter;i++){
+            addCasePanel.add(labelevidenceType);
+            addCasePanel.add(evidenceType.get(i));
+            addCasePanel.add(labelevidenceDescription);
+            addCasePanel.add(evidenceDescription.get(i));
+        }
+        addCasePanel.add(addEvidence);
+        addCasePanel.add(addCaseSubmit);
+        addCasePanel.add(back);
+        add(addCasePanel);
     }
 }
