@@ -1,6 +1,7 @@
 package CrimeDatabase;
 
 import java.util.ArrayList;
+import java.util.ListIterator;
 import java.util.Scanner;
 
 import javax.swing.*;
@@ -64,7 +65,58 @@ public class Driver extends JFrame {
     }
 
     private void editCase() {
+        ListIterator<Case> iterator = list.listIterator();
+        System.out.println("Enter the case number you would like to edit: ");
+        int input = scanner.nextInt();
 
+        for (int i = 0; i < cases.size(); i++) { 
+            if (cases.contains(input)) { 
+                System.out.println("What would you like to edit?");
+                String editInput = scanner.next();
+
+                switch(editInput.toLowerCase()) {
+                    case "id" : 
+                        System.out.println("Enter new id:");
+                        Case idInput = scanner.nextInt();
+                        cases.set(cases.indexOf(i), idInput);
+                        break;
+                    case "level" :
+                        System.out.println("Enter new level:");
+                        Case levelInput = scanner.next();
+                        cases.set(cases.indexOf(i), levelInput);
+                        break;
+                    case "subject" :
+                        System.out.println("Enter new subject:");
+                        Case subInput = scanner.next();
+                        cases.set(cases.indexOf(i), subInput);
+                        break;
+                    case "arresting officer" : 
+                        System.out.println("Enter new arresting officer:");
+                        Case arrOffInput = scanner.next();
+                        cases.set(cases.indexOf(i), arrOffInput);
+                        break;
+                    case "date" : 
+                    System.out.println("Enter new date:");
+                        Case date = scanner.next();
+                        cases.set(cases.indexOf(i), date);
+                        break;
+                    case "evidence" : 
+                    System.out.println("Enter new evidence:");
+                        Case evidInput = scanner.next();
+                        cases.set(cases.indexOf(i), evidInput);
+                        break;
+                    case "description" :
+                    System.out.println("Enter new description:");
+                        Case descInput = scanner.next();
+                        cases.set(cases.indexOf(i), descInput);
+                        break; 
+                    default : 
+                        System.out.println("Invalid choice");
+                }
+            } else { 
+                System.out.println("Case does not exist.");
+            }
+        }
     }
 
     private void removeCase() {
