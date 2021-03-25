@@ -9,9 +9,16 @@ public class Case {
     private Evidence [] evidence;
     private String description;
 
-    public Case() {
-    	
+    public Case(int id, Crime level, Person subject, Person arrestingOfficer, String date, Evidence evidence, String description) {
+    	this.id = id;
+        this.level = level;
+        this.subject = subject;
+        this.arrestingOfficer = arrestingOfficer;
+        this.date = date;
+        this.evidence = evidence;
+        this.description = description;
     }
+    
     public void setId(int id) {
     	this.id = id;
     }
