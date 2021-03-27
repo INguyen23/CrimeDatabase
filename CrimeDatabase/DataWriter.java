@@ -19,7 +19,6 @@ public class DataWriter extends DataConstants {
         }
 
         try (FileWriter file = new FileWriter(OFFICER_FILE_NAME)) {
-
             file.write(jsonO.toJSONString());
             file.flush();
         } catch (IOException e) {
@@ -29,9 +28,12 @@ public class DataWriter extends DataConstants {
 
     public static JSONObject getOfficerJSON(Officer officer) {
         JSONObject officerDetails = new JSONObject();
+        officerDetails.put(OFFICER_ID, officer.getID());
+        officerDetails.put(OFFICER_USERNAME, officer.getUser());
+        officerDetails.put(OFFICER_PASSWORD, officer.getPass());
         officerDetails.put(OFFICER_NAME, officer.getName());
         officerDetails.put(OFFICER_AGE, officer.getAge());
-        officerDetails.put(OFFICER_ARRESTS, officer.getArrests());
+        officerDetails.put(OFFICER_BADGE_ID, officer.getBadgeID());
 
         return officerDetails;
     }
@@ -46,7 +48,7 @@ public class DataWriter extends DataConstants {
             jsonS.add(getSuspectJSON(s.get(i)));
         }
 
-        try(FileWriter file = new FileWriter(SUSPECT_FILE_NAME)) {
+        try(FileWriter file = new FileWriter(SUS_FILE_NAME)) {
             file.write(jsonS.toJSONString());
             file.flush();
         } catch (IOException e) {
@@ -55,18 +57,15 @@ public class DataWriter extends DataConstants {
     }
 
     public static JSONObject getSuspectJSON(Suspect suspect) { 
-        JSONObject suspectDetails = new JSONObject();
-        subjectDetails.put(SUSPECT_ID, suspect.getID());
-        subjectDetails.put(SUSPECT_NAME, suspect.getName());
-        subjectDetails.put(SUSPECT_AGE, suspect.getAge());
-        subjectDetails.put(SUSPECT_SEX, suspect.getSex());
-        subjectDetails.put(SUSPECT_WEIGHT, suspect.getWeight());
-        subjectDetails.put(SUSPECT_HEIGHT, suspect.getHeight());
-        subjectDetails.put(SUSPECT_EYECOLOR, suspect.getEyeColor());
-        subjectDetails.put(SUSPECT_HAIRCOLOR, suspect.getHairColor());
-        subjectDetails.put(SUSPECT_DESCRIPTION, suspect.getDescription());
+        JSONObject subjectDetails = new JSONObject();
+        subjectDetails.put(SUS_ID, suspect.getID());
+        subjectDetails.put(SUS_NAME, suspect.getName());
+        subjectDetails.put(SUS_AGE, suspect.getAge());
+        subjectDetails.put(SUS_SEX, suspect.getSex());
+        subjectDetails.put(SUS_WEIGHT, suspect.getWeight());
+        subjectDetails.put(SUS_DESCRIPTION, suspect.getDescription());
 
-        return suspectDetails;
+        return subjectDetails;
     }
 
 
@@ -90,8 +89,7 @@ public class DataWriter extends DataConstants {
 
     public static JSONObject getCaseJSON(Case case1) { 
         JSONObject caseDetails = new JSONObject();
-        caseDetails.put(CASE_SUBJECT_ID, case1.getSubjectID());
-        caseDetails.put(CASE_USER_ID, case1.getUserID());
+        caseDetails.put(CASE_ID, case1.getId());
         caseDetails.put(CASE_LEVEL, case1.getLevel());
         caseDetails.put(CASE_DATE, case1.getDate());
         caseDetails.put(CASE_EVIDENCE, case1.getEvidence());

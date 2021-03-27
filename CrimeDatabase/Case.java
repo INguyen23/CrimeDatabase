@@ -2,20 +2,20 @@ package CrimeDatabase;
 
 public class Case {
     private int id;
-    private Crime level;
-    private Person subject;
-    private Person arrestingOfficer;
+    private String level;
     private String date;
-    private Evidence [] evidence;
+    private String[] evidence;
+    private String[] witnesses;
+    private String[] victimInfo;
     private String description;
 
-    public Case(int id, Crime level, Person subject, Person arrestingOfficer, String date, Evidence evidence, String description) {
+    public Case(int id, String level, String date, String[] evidence, String[] witnesses, String[] victimInfo, String description) {
     	this.id = id;
         this.level = level;
-        this.subject = subject;
-        this.arrestingOfficer = arrestingOfficer;
         this.date = date;
         this.evidence = evidence;
+        this.witnesses = witnesses;
+        this.victimInfo = victimInfo;
         this.description = description;
     }
     
@@ -23,16 +23,16 @@ public class Case {
     	this.id = id;
     }
     
-    public void setLevel(Crime level) {
+    public void setLevel(String level) {
     	this.level = level; 
     }
 
-    public void setSubject(Person subject) {
-    	this.subject = subject; 
+    public void setWitnesses(String[] witnesses) {
+        this.witnesses = witnesses;
     }
 
-    public void setDate(String Date) {
-    	this.date = Date; 
+    public void setDate(String date) {
+    	this.date = date; 
 
     }
 
@@ -41,25 +41,25 @@ public class Case {
 
     }
 
-    public void setEvidence(Evidence[] evidence) {
+    public void setEvidence(String[] evidence) {
     	this.evidence = evidence;
 
     }
     
-	public void setArrestingOfficer(Person arrestingOfficer) {
-		this.arrestingOfficer = arrestingOfficer;
+	public void setVictimInfo(String[] victimInfo) {
+		this.victimInfo = victimInfo;
 	}
 
     public int getId() {
         return id;
     }
 
-    public Crime getLevel() {
+    public String getLevel() {
         return level;
     }
 
-    public Person getSubject() {
-        return subject;
+    public String[] getWitnesses() {
+        return witnesses;
     }
 
     public String getDate() {
@@ -70,11 +70,11 @@ public class Case {
         return description;
     }
 
-    public Evidence [] getEvidence() {
+    public String[] getEvidence() {
         return evidence;
     }
 
-	public Person getArrestingOfficer() {
-		return arrestingOfficer;
+	public String[] getVictimInfo() {
+		return victimInfo;
 	}
 }

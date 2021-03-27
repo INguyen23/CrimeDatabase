@@ -5,29 +5,21 @@
         "age":37,
         "sex":"male",
         "weight":147,
-        "height":"5'10",
-        "eyecolor":"brown",
-        "haircolor":"black",
-        "description":"wears hat"
+        "description":["5'10","brown", "black","wears hat"]
     },{
         "id":2,
         "name":"Jerry",
         "age":25,
         "sex":"male",
         "weight":189,
-        "height":"6'3",
-        "eyecolor":"blue",
-        "haircolor":"blonde",
-        "description":"butterfly tattoo"
+        "description":["6'3","blonde","butterfly tattoo"]
+        
     },{
         "id":3,
         "name":"Janie",
         "age":57,
         "sex":"female",
         "weight":121,
-        "height":"5'4",
-        "eyecolor":"green",
-        "haircolor":"brown",
-        "description":"scar on left leg"
+        "description":["5'4","green","brown","scar on left leg"]
     }
 ]

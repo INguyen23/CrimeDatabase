@@ -1,27 +1,10 @@
 [
     {
         "id":1,
-        "name":"Officer Bob",
-        "age":40,
-        "arrests":5,
-        "badgeID":123456789,
-        "username":"Bob",
-        "password":"132abc"
-    },
-    {
-        "id":2,
-        "name":"John Smith",
-        "age":27,
-        "badgeID":987654312,
-        "username":"JSmith",
-        "password":"cheesecake"
-    },
-    {
-        "id":3,
-        "name":"Gerald Johnson",
-        "age":31,
-        "badgeID":456789123,
-        "username":"GJohnson",
-        "password":"abc123"
+        "username":"Nguyeni",
+        "password":"123abc",
+        "name":"Ivon",
+        "age":22,
+        "badgeID":"456467987"
     }
 ]

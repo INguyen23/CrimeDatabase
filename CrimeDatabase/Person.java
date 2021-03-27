@@ -1,14 +1,14 @@
 package CrimeDatabase;
 
-public abstract class Person 
-{
+public abstract class Person {
     String name;
     int age;
-    public void setName(){
 
+    public void setName(){
+        this.name = name;
     }
     public void setAge(){
-
+        this.age = age;
     }
     public String getName(){
         return name;

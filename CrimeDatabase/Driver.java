@@ -7,6 +7,7 @@ import java.util.Scanner;
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.*;
+import java.time.Year;
 
 
 public class Driver extends JFrame {
@@ -27,30 +28,27 @@ public class Driver extends JFrame {
 
     }
 
-    protected Case searchCases(String input) {
-        System.out.println("Search through cases: ");
-        //String input = scanner.next();
-        
-        for(Case case1 : cases) {
-            boolean containsEvidence = false;
-            for(Evidence evidence1 : case1.getEvidence()) {
-                if(evidence1.getDescription().equalsIgnoreCase(input)){
-                    containsEvidence = true;
-                }
-            }
-            if ((""+case1.getId()).equalsIgnoreCase(input) || (case1.getLevel().getcrimeType()).equalsIgnoreCase(input) || (case1.getSubject().getName()).equalsIgnoreCase(input) 
-            || case1.getDate().equalsIgnoreCase(input) || containsEvidence || case1.getDescription().equalsIgnoreCase(input)) { 
-                return case1;
+    protected void searchCases() {
+        Cases cases = Cases.getInstance();
+        ArrayList<Case> caseList = cases.getCases();  
+
+        System.out.println("Search through cases:");
+        String input = scanner.nextLine();
+        for (int i = 0; i < caseList.size(); i++) { 
+            if (input.equals(caseList.get(i).getLevel()) || input.contains(caseList.get(i).getDate())) { 
+                System.out.print(caseList.get(i));
+            } else { 
+                System.out.println("No matches.");
+                break;
             }
         }
-        return null;   
     }
 
     protected boolean addCase() {
         System.out.println("Would you like to add a new case (Y/N)?");
         String input = scanner.next();
         
-        if(input.toLowerCase().equals("y")) return true;
+        if (input.equalsIgnoreCase("y")) return true;
         return false;
     }
 
@@ -65,50 +63,67 @@ public class Driver extends JFrame {
     }
 
     protected void editCase() {
-        ListIterator<Case> iterator = list.listIterator();
-        System.out.println("Enter the case number you would like to edit: ");
+        Cases cases = Cases.getInstance();
+        ArrayList<Case> caseList = cases.getCases();
+
+        System.out.println("Enter the case id you would like to edit: ");
         int input = scanner.nextInt();
 
-        for (int i = 0; i < cases.size(); i++) { 
-            if (cases.contains(input)) { 
+        for (int i = 0; i < caseList.size(); i++) { 
+            if (caseList.contains(input)) { 
                 System.out.println("What would you like to edit?");
                 String editInput = scanner.next();
 
                 switch(editInput.toLowerCase()) {
                     case "id" : 
                         System.out.println("Enter new id:");
-                        Case idInput = scanner.nextInt();
-                        cases.set(cases.indexOf(i), idInput);
+                        int idInput = scanner.nextInt();
+                        caseList.get(i).setId(idInput);
                         break;
                     case "level" :
                         System.out.println("Enter new level:");
-                        Case levelInput = scanner.next();
-                        cases.set(cases.indexOf(i), levelInput);
-                        break;
-                    case "subject" :
-                        System.out.println("Enter new subject:");
-                        Case subInput = scanner.next();
-                        cases.set(cases.indexOf(i), subInput);
-                        break;
-                    case "arresting officer" : 
-                        System.out.println("Enter new arresting officer:");
-                        Case arrOffInput = scanner.next();
-                        cases.set(cases.indexOf(i), arrOffInput);
+                        String levelInput = scanner.next();
+                        caseList.get(i).setLevel(levelInput);
                         break;
                     case "date" : 
-                    System.out.println("Enter new date:");
-                        Case date = scanner.next();
-                        cases.set(cases.indexOf(i), date);
+                        System.out.println("Enter new date:");
+                        String date = scanner.next();
+                        caseList.get(i).setDate(date);
                         break;
                     case "evidence" : 
-                    System.out.println("Enter new evidence:");
-                        Case evidInput = scanner.next();
-                        cases.set(cases.indexOf(i), evidInput);
+                        System.out.println("How much evidence would you like to enter?");
+                        int numEvid = scanner.nextInt();
+                        String[] arr = new String[numEvid];
+                        System.out.println("Enter new evidence: ");
+                        for (int j = 0; j < arr.length; j++) { 
+                            arr[j] = scanner.nextLine();
+                            caseList.get(i).setEvidence(arr);
+                        }
+                        break;
+                    case "witnesses" : 
+                        System.out.println("How many witnesses would you like to enter?");
+                        int numWit = scanner.nextInt();
+                        String[] witArr = new String[numWit];
+                        System.out.println("Enter new witnesses: ");
+                        for (int j = 0; j < witArr.length; j++) { 
+                            witArr[j] = scanner.nextLine();
+                            caseList.get(i).setEvidence(witArr);
+                        }
+                        break;
+                    case "victimInfo" : 
+                        System.out.println("How many victims would you like to enter?");
+                        int numVic = scanner.nextInt();
+                        String[] vicArr = new String[numVic];
+                        System.out.println("Enter new victims: ");
+                        for (int j = 0; j < vicArr.length; j++) { 
+                            vicArr[j] = scanner.nextLine();
+                            caseList.get(i).setEvidence(vicArr);
+                        }
                         break;
                     case "description" :
-                    System.out.println("Enter new description:");
-                        Case descInput = scanner.next();
-                        cases.set(cases.indexOf(i), descInput);
+                        System.out.println("Enter new description:");
+                        String descInput = scanner.next();
+                        caseList.get(i).setDescription(descInput);
                         break; 
                     default : 
                         System.out.println("Invalid choice");
@@ -117,6 +132,63 @@ public class Driver extends JFrame {
                 System.out.println("Case does not exist.");
             }
         }
+    }
+
+    private String getField(String prompt) { 
+        System.out.print(prompt  + ": ");
+        return scanner.next();
+    }
+
+    private int getNumField(String word) { 
+        System.out.print(word +": ");
+        return scanner.nextInt();
+    }
+
+    public boolean addAccount() { 
+        System.out.println("Would you like to Create an Account?");
+        String input = scanner.next();
+        if (input.toLowerCase().trim().equals("y")) { 
+            return true;
+        } else {
+        return false;
+        }
+    }
+
+    public boolean deleteAcc() { 
+        System.out.println("Delete Account?");
+        String input = scanner.next();
+        if (input.toLowerCase().trim().equals("y")) { 
+            return true;
+        } else {
+            return false;
+        }
+    }
+
+    public void removeOfficer() { 
+        Officers officers = Officers.getInstance();
+        ArrayList<Officer> list = officers.getOfficers();
+
+        System.out.println("Enter account ID:");
+        int ID = scanner.nextInt();
+        System.out.println("Enter account username:");
+        String userName = scanner.next();
+        System.out.println("Enter account password:");
+        String pass = scanner.next();
+        System.out.println("Enter name:");
+        String name = scanner.next();
+        System.out.println("Enter age:");
+        int age = scanner.nextInt();
+        System.out.println("Enter badge ID:");
+        String badgeID = scanner.next();
+
+        if(list.contains(new Officer(ID, userName, pass, name, age, badgeID))) { 
+            list.remove(new Officer(ID, userName, pass, name, age, badgeID));
+            System.out.println("Account removed");
+        }
+        else { 
+            System.out.println("Account with those credentials does not exist");
+        }
+
     }
 
     protected void removeCase(String idNumber) {
@@ -141,7 +213,67 @@ public class Driver extends JFrame {
         mainFrame.setVisible(true);
         mainFrame.setSize(500,500);
     }
+
+    public void play() { 
+        System.out.println("edit:");
+        editCase();
+       /* Officers officers = Officers.getInstance();
+        displayAccounts();
+        
+        while(removeAccount()) { 
+            remove();
+        }
+        System.out.println("NEW LIST");
+        displayAccounts();
+        System.out.println("\nExiting");*/
+
+        
+    }
+
+    private void checkLogin() { 
+        Officers officers = Officers.getInstance();
+        ArrayList<Officer> list = officers.getOfficers();
+
+        System.out.println("Enter account ID:");
+        int logID = scanner.nextInt();
+        System.out.println("Enter account username:");
+        String logUsername = scanner.next();
+        System.out.println("Enter account password:");
+        String logPass = scanner.next();
+        System.out.println("Enter name:");
+        String logName = scanner.next();
+        System.out.println("Enter age:");
+        int logAge = scanner.nextInt();
+        System.out.println("Enter badge ID:");
+        String logBadgeID = scanner.next();
+
+        Officer offInstance = new Officer(logID, logUsername,logPass,logName,logAge,logBadgeID);
+        
+
+        int size = list.size();
+
+        for (int i  = 0; i < size; i++) { 
+            if(offInstance.equals(list.get(i).getUser())) { 
+                System.out.println("Logged in!");
+            } else { 
+                System.out.println("Incorrect User/Password!");
+            }
+        }
+    }
+
+    public void displayAccounts(){
+        Officers officers = Officers.getInstance();
+        ArrayList<Officer> list = officers.getOfficers();
+
+        for (Officer officer : list) { 
+            System.out.println(officer.getUser()+officer.getPass()+officer.getName()+officer.getAge()+officer.getBadgeID());
+        }
+    }
+
     public static void main(String [] args) {
+       /* Driver d = new Driver();
+        d.play();*/
+        
         try
         {
             accessLevels = new ArrayList<String>();

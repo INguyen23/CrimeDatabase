@@ -1,6 +1,7 @@
 package CrimeDatabase;
 
 import java.util.ArrayList;
+import java.util.Iterator;
 
 public class Officers {
     private static Officers officers = null;
@@ -21,8 +22,12 @@ public class Officers {
         return officerList;
     }
 
-    public void addOfficer(int ID, String userName, String pass, String name, int age, String badgeID) { 
-        officerList.add(new Officer( ID,  userName,  pass,  name,  age,  badgeID));
+    public void addOfficer(int id, String userName, String pass, String name, int age, String badgeID) { 
+        officerList.add(new Officer( id,  userName,  pass,  name,  age,  badgeID));
         DataWriter.saveOfficers();
+    }
+
+    public Iterator<Officer> createIterator() {
+        return officerList.iterator();
     }
 }
