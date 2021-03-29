@@ -54,8 +54,9 @@ public class DataLoader extends DataConstants {
                 String witnesses = (String)caseJSON.get(CASE_WITNESSES);
                 String victimInfo = (String)caseJSON.get(CASE_VICTIM_INFO);
                 String description = (String)caseJSON.get(CASE_DESCRIPTION);
+                String suspect = (String)caseJSON.get(CASE_SUSPECT);
 
-                cases.add(new Case(caseNum, level, date, evidence, witnesses, victimInfo, description));
+                cases.add(new Case(caseNum, level, date, evidence, witnesses, victimInfo, description, suspect));
             }
 
             return cases;
@@ -85,8 +86,9 @@ public class DataLoader extends DataConstants {
                 String eyeColor = (String)subjectJSON.get(SUBJECT_EYECOLOR);
                 String hairColor = (String)subjectJSON.get(SUBJECT_HAIRCOLOR);
                 String description = (String)subjectJSON.get(SUBJECT_DESCRIPTION);
+                String crime = (String)subjectJSON.get(SUBJECT_CRIME);
 
-                subjects.add(new Subject(ID, name, age, sex, weight, height, eyeColor, hairColor, description));
+                subjects.add(new Subject(ID, name, age, sex, weight, height, eyeColor, hairColor, description, crime));
             }
 
             return subjects;

@@ -7,6 +7,10 @@ import java.util.Scanner;
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.*;
+import java.io.BufferedWriter;
+import java.io.File;
+import java.io.FileWriter;
+import java.io.IOException;
 import java.time.Year;
 
 
@@ -19,18 +23,20 @@ public class Driver {
 
     private String getField(String prompt) { 
         System.out.println(prompt  + ": ");
-        return in.next();
+        return in.nextLine();
         
     }
 
     private int getNumField(String word) { 
         System.out.println(word +": ");
-        return in.nextInt();
+        int ret = in.nextInt();
+        in.nextLine();
+        return ret;
     }
 
     public boolean checkAddAcc() { 
         System.out.println("Would you like to Create an Account? (y/n)");
-        String input = in.next();
+        String input = in.nextLine();
 
         if (input.toLowerCase().trim().equals("y")) { 
             return true;
@@ -77,7 +83,7 @@ public class Driver {
         }   
     }
 
-    private void checkLogin()  {
+    private void checkLogin() throws IOException  {
         Users users = Users.getInstance();
         ArrayList<User> userList = users.getUsers();
 
@@ -85,6 +91,7 @@ public class Driver {
         String userinput = in.next();
         System.out.println("Enter Password: ");
         String passInput = in.next();
+        in.nextLine();
 
         int size = userList.size();
         boolean check = false;
@@ -125,8 +132,9 @@ public class Driver {
             String witnesses = getField("Enter witnesses");
             String victimInfo = getField("Enter victim Information");
             String description = getField("Enter case description");
+            String suspect = getField("Enter case suspect");
 
-            cases.addCase(caseNum, level, date, evidence, witnesses, victimInfo, description);
+            cases.addCase(caseNum, level, date, evidence, witnesses, victimInfo, description, suspect);
             System.out.println("Added new case!");
         }
     }
@@ -142,7 +150,7 @@ public class Driver {
         }
     }
 
-    public void searchCase() { 
+    public void searchCase() throws IOException { 
         Cases cases = Cases.getInstance();
         ArrayList<Case> caseList = cases.getCases();
 
@@ -154,14 +162,27 @@ public class Driver {
         String witnesses = getField("Enter witnesses");
         String victimInfo = getField("Enter victim Information");
         String description = getField("Enter case description");
+        String suspect = getField("Enter case suspect");
+
+        File caseDisplay = new File("CaseDisplay.txt");
+        boolean bool = caseDisplay.delete();
+        bool = caseDisplay.createNewFile();
+        FileWriter writer = new FileWriter(caseDisplay);
+        BufferedWriter out = new BufferedWriter(writer);
+        Desktop desk = Desktop.getDesktop();
 
         for (Case case1 : caseList) { 
             if(id == case1.getCaseNum() || case1.getLevel().equalsIgnoreCase(level) || case1.getDate().equalsIgnoreCase(date) || case1.getEvidence().equalsIgnoreCase(evidence) || case1.getWitnesses().equalsIgnoreCase(witnesses) || case1.getVictimInfo().equalsIgnoreCase(victimInfo) || case1.getDescription().equalsIgnoreCase(description)) { 
                 System.out.println("Case #: " +  case1.getCaseNum() + "\nLevel: " + case1.getLevel() + "\nDate:" + case1.getDate() + "\nEvidence: " + case1.getEvidence() + "\nWitnesses: " + case1.getWitnesses()
-                + "\nVictim Info: " + case1.getVictimInfo() + "\nDescription: " + case1.getDescription());
+                + "\nVictim Info: " + case1.getVictimInfo() + "\nDescription: " + case1.getDescription() + "\nSuspect: " + case1.getSuspect());
                 System.out.println();
+
+                out.write("Case #: " +  case1.getCaseNum() + "\nLevel: " + case1.getLevel() + "\nDate:" + case1.getDate() + "\nEvidence: " + case1.getEvidence() + "\nWitnesses: " + case1.getWitnesses()
+                + "\nVictim Info: " + case1.getVictimInfo() + "\nDescription: " + case1.getDescription() + "\nSuspect: " + case1.getSuspect()+"\n\n\n");
             }
         }
+        out.close();
+        desk.open(caseDisplay);
     }
 
     public void addSubject() { 
@@ -177,13 +198,14 @@ public class Driver {
             String eyeColor = getField("Enter suspect eye color");
             String hairColor = getField("Enter suspect hair color");
             String description = getField("Enter description of suspect");
+            String crime = getField("Enter crimes of suspect and contact info");
 
-            subjects.addSubject(ID, name, age, sex, weight, height, eyeColor, hairColor, description);
+            subjects.addSubject(ID, name, age, sex, weight, height, eyeColor, hairColor, description, crime);
             System.out.println("Added new suspect!");
         }
     }
 
-    public void searchSubject() {
+    public void searchSubject() throws IOException {
         Subjects subjects = Subjects.getInstance();
         ArrayList<Subject> subList = subjects.getSubjects();
 
@@ -198,17 +220,29 @@ public class Driver {
         String hairColor = getField("Enter suspect hair color");
         String description = getField("Enter description of suspect");
 
+        File subjectDisplay = new File("SubjectDisplay.txt");
+        boolean bool = subjectDisplay.delete();
+        bool = subjectDisplay.createNewFile();
+        FileWriter writer = new FileWriter(subjectDisplay);
+        BufferedWriter out = new BufferedWriter(writer);
+        Desktop desk = Desktop.getDesktop();
+
         for (Subject subject : subList) { 
             if(ID == subject.getID() || subject.getName().equalsIgnoreCase(name) || age == subject.getAge() || subject.getSex().equalsIgnoreCase(sex) || weight == subject.getWeight() || subject.getHeight().equalsIgnoreCase(height) || subject.getEyeColor().equalsIgnoreCase(eyeColor) || subject.getHairColor().equalsIgnoreCase(hairColor) || subject.getDescription().equalsIgnoreCase(description)) { 
                 System.out.println("ID: " + subject.getID() + "\nName: " + subject.getName() + "\nAge: " + subject.getAge() + "\nSex: " + subject.getSex() + "\nWeight: " + subject.getWeight() 
                 + "\nHeight: " + subject.getHeight() + "\nEye Color: " + subject.getEyeColor() + "\nHair Color: " + subject.getHairColor() 
                 + "\nDescription: " + subject.getDescription());
                 System.out.println();
+                out.append("ID: " + subject.getID() + "\nName: " + subject.getName() + "\nAge: " + subject.getAge() + "\nSex: " + subject.getSex() + "\nWeight: " + subject.getWeight() 
+                + "\nHeight: " + subject.getHeight() + "\nEye Color: " + subject.getEyeColor() + "\nHair Color: " + subject.getHairColor() 
+                + "\nDescription: " + subject.getDescription()+"\nCrime and Contact info: "+subject.getCrime()+"\n\n\n");
             } 
         }
+        out.close();
+        desk.open(subjectDisplay);
     }
 
-    public void chooseFromMenu() { 
+    public void chooseFromMenu() throws IOException { 
         System.out.println("What would you like to do:\n1.) Add Case\n2.) Search Case\n3.) Add Suspect\n4.) Search Suspect");
         int input = in.nextInt();
 
@@ -229,11 +263,16 @@ public class Driver {
     public void play() {
         System.out.println("Welcome to Our Crime Database!\nChoose an option: \n1.) Create Account\n2.) Login");
         int ans = in.nextInt();
-
+        in.nextLine();
         if (ans == 1) { 
             addAccount();
         } else if (ans == 2) { 
-            checkLogin();
+            try {
+                checkLogin();
+            } catch (IOException e) {
+                // TODO Auto-generated catch block
+                e.printStackTrace();
+            }
         } else { 
             System.out.println("Option not found");
         }

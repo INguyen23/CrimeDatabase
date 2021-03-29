@@ -68,6 +68,7 @@ public class DataWriter extends DataConstants {
         subjectDetails.put(SUBJECT_EYECOLOR, subject.getEyeColor());
         subjectDetails.put(SUBJECT_HAIRCOLOR, subject.getHairColor());
         subjectDetails.put(SUBJECT_DESCRIPTION, subject.getDescription());
+        subjectDetails.put(SUBJECT_CRIME, subject.getCrime());
 
         return subjectDetails;
     }
@@ -99,7 +100,8 @@ public class DataWriter extends DataConstants {
         caseDetails.put(CASE_EVIDENCE, case1.getEvidence());
         caseDetails.put(CASE_WITNESSES, case1.getWitnesses());
         caseDetails.put(CASE_VICTIM_INFO, case1.getVictimInfo());
-        caseDetails.put(CASE_DATE, case1.getDescription());
+        caseDetails.put(CASE_DESCRIPTION, case1.getDescription());
+        caseDetails.put(CASE_SUSPECT, case1.getSuspect());
 
         return caseDetails;
     }

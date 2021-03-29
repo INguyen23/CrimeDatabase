@@ -20,6 +20,7 @@ public abstract  class DataConstants {
     protected static final String SUBJECT_EYECOLOR = "eyecolor";
     protected static final String SUBJECT_HAIRCOLOR = "haircolor";
     protected static final String SUBJECT_DESCRIPTION = "description";
+    protected static final String SUBJECT_CRIME = "crime";
 
     protected static final String CASE_FILE_NAME = "CrimeDatabase/case.json";
     protected static final String CASE_NUMBER = "case#";
@@ -29,4 +30,5 @@ public abstract  class DataConstants {
     protected static final String CASE_WITNESSES = "witnesses";
     protected static final String CASE_VICTIM_INFO = "victimInfo";
     protected static final String CASE_DESCRIPTION = "description";
+    protected static final String CASE_SUSPECT = "suspect";
 }

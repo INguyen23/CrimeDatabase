@@ -2,23 +2,25 @@
     {
         "id":1,
         "name":"Aizen",
-        "age":37,
+        "age":30,
         "sex":"male",
         "weight":147,
-        "height":"5'10",
+        "height":"5'9",
         "eyecolor":"brown",
         "haircolor":"black",
-        "description":"wears hat"
+        "description":"wears hat",
+        "crime":"Convicted and not jail: Robbery, Contact info: 8035496211"
     },{
         "id":2,
         "name":"Jerry",
-        "age":25,
+        "age":21,
         "sex":"male",
         "weight":189,
         "height":"6'3",
         "eyecolor":"blue",
         "haircolor":"blonde",
-        "description":"butterfly tattoo"
+        "description":"butterfly tattoo",
+        "crime":"Convicted and in jail: robbing a bar and stealing liquor, Contact info: Richland County Correctional Facility"
     },{
         "id":3,
         "name":"Janie",
@@ -28,7 +30,8 @@
         "height":"5'4",
         "eyecolor":"green",
         "haircolor":"brown",
-        "description":"scar on left leg"
+        "description":"scar on left leg",
+        "crime":"robbery"
     },{
         "id":4,
         "name":"Megan",
@@ -38,6 +41,29 @@
         "height":"5'4",
         "eyecolor":"green",
         "haircolor":"red",
-        "description":"dove tattoo"
+        "description":"dove tattoo",
+        "crime":"Convicted and not jail: murdering watermelon, Contact info: 8035678733"
+    },{
+        "id":5,
+        "name":"Brett",
+        "age":30,
+        "sex":"male",
+        "weight":205,
+        "height":"5'9",
+        "eyecolor":"blue",
+        "haircolor":"black",
+        "description":"scar over left eye",
+        "crime":"Robbing a bank"
+    },{
+        "id":6,
+        "name":"John",
+        "age":30,
+        "sex":"male",
+        "weight":220,
+        "height":"5'9",
+        "eyecolor":"green",
+        "haircolor":"black",
+        "description":"Ball Cap",
+        "crime":"Convicted and not jail: Art Theft, Contact info: 8032548761"
     }
 ]

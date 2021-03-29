@@ -8,8 +8,9 @@ public class Case {
     private String witnesses;
     private String victimInfo;
     private String description;
+    private String suspect;
 
-    public Case(int caseNum, String level, String date, String evidence, String witnesses, String victimInfo, String description) { 
+    public Case(int caseNum, String level, String date, String evidence, String witnesses, String victimInfo, String description, String suspect) { 
         this.caseNum = caseNum;
         this.level = level;
         this.date = date;
@@ -17,6 +18,15 @@ public class Case {
         this.witnesses = witnesses;
         this.victimInfo = victimInfo;
         this.description = description;
+        this.suspect = suspect;
+    }
+
+    public String getSuspect() {
+        return suspect;
+    }
+    
+    public void setSuspect(String suspect) {
+        this.suspect = suspect;
     }
 
     public int getCaseNum() { 

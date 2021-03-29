@@ -22,8 +22,8 @@ public class Subjects {
         return subjectList;
     }
 
-    public void addSubject(int ID, String name, int age, String sex, int weight, String height, String eyeColor, String hairColor, String description) { 
-        subjectList.add(new Subject( ID,  name,  age,  sex,  weight,  height,  eyeColor,  hairColor,  description));
+    public void addSubject(int ID, String name, int age, String sex, int weight, String height, String eyeColor, String hairColor, String description, String crime) { 
+        subjectList.add(new Subject( ID,  name,  age,  sex,  weight,  height,  eyeColor,  hairColor,  description, crime));
         DataWriter.saveSubjects();
     }
 }

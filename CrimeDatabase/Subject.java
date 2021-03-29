@@ -10,8 +10,9 @@ public class Subject {
     private String eyeColor;
     private String hairColor;
     private String description;
+    private String crime;
 
-    public Subject(int ID, String name, int age, String sex, int weight, String height2, String eyeColor, String hairColor, String description) {
+    public Subject(int ID, String name, int age, String sex, int weight, String height2, String eyeColor, String hairColor, String description, String crime) {
         this.ID = ID;
         this.name = name;
         this.age = age;
@@ -21,6 +22,15 @@ public class Subject {
         this.eyeColor = eyeColor;
         this.hairColor = hairColor;
         this.description = description;
+        this.crime = crime;
+    }
+
+    public String getCrime() {
+        return crime;
+    }
+
+    public void setCrime(String crime) { 
+        this.crime = crime;
     }
 
     public int getID() { 

@@ -22,8 +22,8 @@ public class Cases {
         return caseList;
     }
 
-    public void addCase(int caseNum, String level, String date, String evidence, String witnesses, String victimInfo, String description) { 
-        caseList.add(new Case(caseNum, level, date, evidence, witnesses, victimInfo, description));
+    public void addCase(int caseNum, String level, String date, String evidence, String witnesses, String victimInfo, String description, String suspect) { 
+        caseList.add(new Case(caseNum, level, date, evidence, witnesses, victimInfo, description, suspect));
         DataWriter.saveCases();
     }
 
