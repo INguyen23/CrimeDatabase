@@ -18,17 +18,18 @@ public class Driver {
     }
 
     private String getField(String prompt) { 
-        System.out.print(prompt  + ": ");
+        System.out.println(prompt  + ": ");
         return in.next();
+        
     }
 
     private int getNumField(String word) { 
-        System.out.print(word +": ");
+        System.out.println(word +": ");
         return in.nextInt();
     }
 
     public boolean checkAddAcc() { 
-        System.out.println("Would you like to Create an Account?");
+        System.out.println("Would you like to Create an Account? (y/n)");
         String input = in.next();
 
         if (input.toLowerCase().trim().equals("y")) { 
@@ -59,7 +60,7 @@ public class Driver {
     public void addAccount() { 
         Users users = Users.getInstance();
 
-        while(checkAddAcc()) { 
+        if(checkAddAcc()) { 
             int ID = getNumField("Enter ID");
             String userName = getField("Enter username");
             String pass = getField("Enter password");
@@ -69,7 +70,10 @@ public class Driver {
 
             users.addUser(ID, userName, pass, name, age, badgeID);
             System.out.println("Account Created!");
-            break;
+            play();
+        }
+        else {
+            play();
         }   
     }
 
@@ -83,16 +87,24 @@ public class Driver {
         String passInput = in.next();
 
         int size = userList.size();
-
+        boolean check = false;
         for (User user : userList) {
             if(user.getUser().equals(userinput) && user.getPass().equals(passInput)) {
                 System.out.println("Successfully Logged in!");
+                check = true;
             }
+        }
+        if(check) {
+            chooseFromMenu();
+        }
+        else {
+            System.out.println("Incorrect Log in");
+            play();
         }
     }
 
     public boolean checkAddCase() { 
-        System.out.println("Would you like to add a case?");
+        System.out.println("Would you like to add a case? (y/n)");
         String input = in.next();
 
         if (input.toLowerCase().trim().equals("y")) { 
@@ -105,7 +117,7 @@ public class Driver {
     public void addCase() { 
         Cases cases = Cases.getInstance();
 
-        while(checkAddCase()) { 
+        if(checkAddCase()) { 
             int caseNum = getNumField("Enter case number");
             String level = getField("Enter case level");
             String date = getField("Enter case date");
@@ -116,7 +128,6 @@ public class Driver {
 
             cases.addCase(caseNum, level, date, evidence, witnesses, victimInfo, description);
             System.out.println("Added new case!");
-            break;
         }
     }
 
@@ -212,6 +223,7 @@ public class Driver {
         } else {
             System.out.println("Option not found");
         }
+        chooseFromMenu();
     }
 
     public void play() {
@@ -222,7 +234,6 @@ public class Driver {
             addAccount();
         } else if (ans == 2) { 
             checkLogin();
-            chooseFromMenu();
         } else { 
             System.out.println("Option not found");
         }
