@@ -10,153 +10,91 @@ import java.awt.event.*;
 import java.time.Year;
 
 
-public class Driver extends JFrame {
-    private Scanner scanner;
-    private static String accessLevel;
-    private static ArrayList<Case> cases;
-    private static ArrayList<String> users;
-    private static ArrayList<String> pass;
-    private static ArrayList<String> accessLevels;
-    private static Login loginFrame;
-    private static Main mainFrame;
+public class Driver {
+    private Scanner in;
 
-    public Driver() {
-        scanner = new Scanner(System.in);
-    }
-
-    protected void editInfo() {
-
-    }
-
-    protected void searchCases() {
-        Cases cases = Cases.getInstance();
-        ArrayList<Case> caseList = cases.getCases();  
-
-        System.out.println("Search through cases:");
-        String input = scanner.nextLine();
-        for (int i = 0; i < caseList.size(); i++) { 
-            if (input.equals(caseList.get(i).getLevel()) || input.contains(caseList.get(i).getDate())) { 
-                System.out.print(caseList.get(i));
-            } else { 
-                System.out.println("No matches.");
-                break;
-            }
-        }
-    }
-
-    protected boolean addCase() {
-        System.out.println("Would you like to add a new case (Y/N)?");
-        String input = scanner.next();
-        
-        if (input.equalsIgnoreCase("y")) return true;
-        return false;
-    }
-
-    protected static boolean verifyCredentials(String user, String pswd) {
-        if(users.contains(user)&&pass.contains(pswd)) {
-            if(users.indexOf(user)==users.indexOf(pswd)){
-                accessLevel = accessLevels.get(users.indexOf(user));
-                return true;
-            }
-        }
-        return false;
-    }
-
-    protected void editCase() {
-        Cases cases = Cases.getInstance();
-        ArrayList<Case> caseList = cases.getCases();
-
-        System.out.println("Enter the case id you would like to edit: ");
-        int input = scanner.nextInt();
-
-        for (int i = 0; i < caseList.size(); i++) { 
-            if (caseList.contains(input)) { 
-                System.out.println("What would you like to edit?");
-                String editInput = scanner.next();
-
-                switch(editInput.toLowerCase()) {
-                    case "id" : 
-                        System.out.println("Enter new id:");
-                        int idInput = scanner.nextInt();
-                        caseList.get(i).setId(idInput);
-                        break;
-                    case "level" :
-                        System.out.println("Enter new level:");
-                        String levelInput = scanner.next();
-                        caseList.get(i).setLevel(levelInput);
-                        break;
-                    case "date" : 
-                        System.out.println("Enter new date:");
-                        String date = scanner.next();
-                        caseList.get(i).setDate(date);
-                        break;
-                    case "evidence" : 
-                        System.out.println("How much evidence would you like to enter?");
-                        int numEvid = scanner.nextInt();
-                        String[] arr = new String[numEvid];
-                        System.out.println("Enter new evidence: ");
-                        for (int j = 0; j < arr.length; j++) { 
-                            arr[j] = scanner.nextLine();
-                            caseList.get(i).setEvidence(arr);
-                        }
-                        break;
-                    case "witnesses" : 
-                        System.out.println("How many witnesses would you like to enter?");
-                        int numWit = scanner.nextInt();
-                        String[] witArr = new String[numWit];
-                        System.out.println("Enter new witnesses: ");
-                        for (int j = 0; j < witArr.length; j++) { 
-                            witArr[j] = scanner.nextLine();
-                            caseList.get(i).setEvidence(witArr);
-                        }
-                        break;
-                    case "victimInfo" : 
-                        System.out.println("How many victims would you like to enter?");
-                        int numVic = scanner.nextInt();
-                        String[] vicArr = new String[numVic];
-                        System.out.println("Enter new victims: ");
-                        for (int j = 0; j < vicArr.length; j++) { 
-                            vicArr[j] = scanner.nextLine();
-                            caseList.get(i).setEvidence(vicArr);
-                        }
-                        break;
-                    case "description" :
-                        System.out.println("Enter new description:");
-                        String descInput = scanner.next();
-                        caseList.get(i).setDescription(descInput);
-                        break; 
-                    default : 
-                        System.out.println("Invalid choice");
-                }
-            } else { 
-                System.out.println("Case does not exist.");
-            }
-        }
+    public Driver() { 
+        in = new Scanner(System.in);
     }
 
     private String getField(String prompt) { 
         System.out.print(prompt  + ": ");
-        return scanner.next();
+        return in.next();
     }
 
     private int getNumField(String word) { 
         System.out.print(word +": ");
-        return scanner.nextInt();
+        return in.nextInt();
     }
 
-    public boolean addAccount() { 
+    public boolean checkAddAcc() { 
         System.out.println("Would you like to Create an Account?");
-        String input = scanner.next();
+        String input = in.next();
+
         if (input.toLowerCase().trim().equals("y")) { 
             return true;
-        } else {
-        return false;
+        } else { 
+            return false;
         }
     }
 
-    public boolean deleteAcc() { 
-        System.out.println("Delete Account?");
-        String input = scanner.next();
+    public void displayUsers() {
+        Users users = Users.getInstance();
+        ArrayList<User> userList = users.getUsers();
+
+        for (User user : userList) {
+            System.out.println(user.getID()+user.getUser()+user.getPass()+user.getName()+user.getAge()+user.getBadgeID());
+        }
+    }
+
+    public void displayCases() { 
+        Cases cases = Cases.getInstance();
+        ArrayList<Case> caseList = cases.getCases();
+
+        for(Case case1 : caseList) { 
+            System.out.println(case1.getCaseNum()+case1.getLevel());
+        }
+    }
+
+    public void addAccount() { 
+        Users users = Users.getInstance();
+
+        while(checkAddAcc()) { 
+            int ID = getNumField("Enter ID");
+            String userName = getField("Enter username");
+            String pass = getField("Enter password");
+            String name = getField("Enter name");
+            int age = getNumField("Enter age");
+            String badgeID = getField("Enter Badge ID");
+
+            users.addUser(ID, userName, pass, name, age, badgeID);
+            System.out.println("Account Created!");
+            break;
+        }   
+    }
+
+    private void checkLogin()  {
+        Users users = Users.getInstance();
+        ArrayList<User> userList = users.getUsers();
+
+        System.out.println("Enter Username: ");
+        String userinput = in.next();
+        System.out.println("Enter Password: ");
+        String passInput = in.next();
+
+        int size = userList.size();
+
+        for (User user : userList) {
+            if(user.getUser().equals(userinput) && user.getPass().equals(passInput)) {
+                System.out.println("Successfully Logged in!");
+            }
+        }
+    }
+
+    public boolean checkAddCase() { 
+        System.out.println("Would you like to add a case?");
+        String input = in.next();
+
         if (input.toLowerCase().trim().equals("y")) { 
             return true;
         } else {
@@ -164,132 +102,135 @@ public class Driver extends JFrame {
         }
     }
 
-    public void removeOfficer() { 
-        Officers officers = Officers.getInstance();
-        ArrayList<Officer> list = officers.getOfficers();
+    public void addCase() { 
+        Cases cases = Cases.getInstance();
 
-        System.out.println("Enter account ID:");
-        int ID = scanner.nextInt();
-        System.out.println("Enter account username:");
-        String userName = scanner.next();
-        System.out.println("Enter account password:");
-        String pass = scanner.next();
-        System.out.println("Enter name:");
-        String name = scanner.next();
-        System.out.println("Enter age:");
-        int age = scanner.nextInt();
-        System.out.println("Enter badge ID:");
-        String badgeID = scanner.next();
+        while(checkAddCase()) { 
+            int caseNum = getNumField("Enter case number");
+            String level = getField("Enter case level");
+            String date = getField("Enter case date");
+            String evidence = getField("Enter case evidence");
+            String witnesses = getField("Enter witnesses");
+            String victimInfo = getField("Enter victim Information");
+            String description = getField("Enter case description");
 
-        if(list.contains(new Officer(ID, userName, pass, name, age, badgeID))) { 
-            list.remove(new Officer(ID, userName, pass, name, age, badgeID));
-            System.out.println("Account removed");
+            cases.addCase(caseNum, level, date, evidence, witnesses, victimInfo, description);
+            System.out.println("Added new case!");
+            break;
         }
-        else { 
-            System.out.println("Account with those credentials does not exist");
+    }
+
+    public boolean checkAddSubject() { 
+        System.out.println("Would you like to add a suspect?");
+        String input = in.next();
+
+        if (input.toLowerCase().trim().equals("y")) { 
+            return true;
+        } else { 
+            return false;
         }
-
     }
 
-    protected void removeCase(String idNumber) {
-        cases.remove(this.searchCases(""+idNumber));
-    }
+    public void searchCase() { 
+        Cases cases = Cases.getInstance();
+        ArrayList<Case> caseList = cases.getCases();
 
-    protected static void addCredentials(String user, String pswd, String level) {
-        users.add(user);
-        pass.add(level);
-        accessLevels.add(level);
-    }
+        System.out.println("Search for Case(Enter 0 for unknown fields)");
+        int id = getNumField("Enter case number");
+        String level = getField("Enter case level");
+        String date = getField("Enter case date");
+        String evidence = getField("Enter case evidence");
+        String witnesses = getField("Enter witnesses");
+        String victimInfo = getField("Enter victim Information");
+        String description = getField("Enter case description");
 
-    protected void editCredentials(String user, String pswd, String level) {
-        int index = users.indexOf(user);
-        pass.set(index, pswd);
-        accessLevels.set(index, level);
-    }
-
-    public void toMain(){
-        mainFrame = new Main();
-        loginFrame.setVisible(false);
-        mainFrame.setVisible(true);
-        mainFrame.setSize(500,500);
-    }
-
-    public void play() { 
-        System.out.println("edit:");
-        editCase();
-       /* Officers officers = Officers.getInstance();
-        displayAccounts();
-        
-        while(removeAccount()) { 
-            remove();
-        }
-        System.out.println("NEW LIST");
-        displayAccounts();
-        System.out.println("\nExiting");*/
-
-        
-    }
-
-    private void checkLogin() { 
-        Officers officers = Officers.getInstance();
-        ArrayList<Officer> list = officers.getOfficers();
-
-        System.out.println("Enter account ID:");
-        int logID = scanner.nextInt();
-        System.out.println("Enter account username:");
-        String logUsername = scanner.next();
-        System.out.println("Enter account password:");
-        String logPass = scanner.next();
-        System.out.println("Enter name:");
-        String logName = scanner.next();
-        System.out.println("Enter age:");
-        int logAge = scanner.nextInt();
-        System.out.println("Enter badge ID:");
-        String logBadgeID = scanner.next();
-
-        Officer offInstance = new Officer(logID, logUsername,logPass,logName,logAge,logBadgeID);
-        
-
-        int size = list.size();
-
-        for (int i  = 0; i < size; i++) { 
-            if(offInstance.equals(list.get(i).getUser())) { 
-                System.out.println("Logged in!");
-            } else { 
-                System.out.println("Incorrect User/Password!");
+        for (Case case1 : caseList) { 
+            if(id == case1.getCaseNum() || case1.getLevel().equalsIgnoreCase(level) || case1.getDate().equalsIgnoreCase(date) || case1.getEvidence().equalsIgnoreCase(evidence) || case1.getWitnesses().equalsIgnoreCase(witnesses) || case1.getVictimInfo().equalsIgnoreCase(victimInfo) || case1.getDescription().equalsIgnoreCase(description)) { 
+                System.out.println("Case #: " +  case1.getCaseNum() + "\nLevel: " + case1.getLevel() + "\nDate:" + case1.getDate() + "\nEvidence: " + case1.getEvidence() + "\nWitnesses: " + case1.getWitnesses()
+                + "\nVictim Info: " + case1.getVictimInfo() + "\nDescription: " + case1.getDescription());
+                System.out.println();
             }
         }
     }
 
-    public void displayAccounts(){
-        Officers officers = Officers.getInstance();
-        ArrayList<Officer> list = officers.getOfficers();
+    public void addSubject() { 
+        Subjects subjects = Subjects.getInstance();
 
-        for (Officer officer : list) { 
-            System.out.println(officer.getUser()+officer.getPass()+officer.getName()+officer.getAge()+officer.getBadgeID());
+        while(checkAddSubject()) { 
+            int ID = getNumField("Enter ID");
+            String name = getField("Enter suspect name");
+            int age = getNumField("Enter suspect age");
+            String sex = getField("Enter suspect sex");
+            int weight = getNumField("Enter suspect weight");
+            String height = getField("Enter suspect height");
+            String eyeColor = getField("Enter suspect eye color");
+            String hairColor = getField("Enter suspect hair color");
+            String description = getField("Enter description of suspect");
+
+            subjects.addSubject(ID, name, age, sex, weight, height, eyeColor, hairColor, description);
+            System.out.println("Added new suspect!");
+        }
+    }
+
+    public void searchSubject() {
+        Subjects subjects = Subjects.getInstance();
+        ArrayList<Subject> subList = subjects.getSubjects();
+
+        System.out.println("Search for Suspects(Enter 0 for unknown fields)");
+        int ID = getNumField("Enter ID");
+        String name = getField("Enter suspect name");
+        int age = getNumField("Enter suspect age");
+        String sex = getField("Enter suspect sex");
+        int weight = getNumField("Enter suspect weight");
+        String height = getField("Enter suspect height");
+        String eyeColor = getField("Enter suspect eye color");
+        String hairColor = getField("Enter suspect hair color");
+        String description = getField("Enter description of suspect");
+
+        for (Subject subject : subList) { 
+            if(ID == subject.getID() || subject.getName().equalsIgnoreCase(name) || age == subject.getAge() || subject.getSex().equalsIgnoreCase(sex) || weight == subject.getWeight() || subject.getHeight().equalsIgnoreCase(height) || subject.getEyeColor().equalsIgnoreCase(eyeColor) || subject.getHairColor().equalsIgnoreCase(hairColor) || subject.getDescription().equalsIgnoreCase(description)) { 
+                System.out.println("ID: " + subject.getID() + "\nName: " + subject.getName() + "\nAge: " + subject.getAge() + "\nSex: " + subject.getSex() + "\nWeight: " + subject.getWeight() 
+                + "\nHeight: " + subject.getHeight() + "\nEye Color: " + subject.getEyeColor() + "\nHair Color: " + subject.getHairColor() 
+                + "\nDescription: " + subject.getDescription());
+                System.out.println();
+            } 
+        }
+    }
+
+    public void chooseFromMenu() { 
+        System.out.println("What would you like to do:\n1.) Add Case\n2.) Search Case\n3.) Add Suspect\n4.) Search Suspect");
+        int input = in.nextInt();
+
+        if (input == 1) { 
+            addCase();
+        } else if (input == 2) {
+            searchCase();
+        } else if (input == 3) { 
+            addSubject();
+        } else if (input == 4) { 
+            searchSubject();
+        } else {
+            System.out.println("Option not found");
+        }
+    }
+
+    public void play() {
+        System.out.println("Welcome to Our Crime Database!\nChoose an option: \n1.) Create Account\n2.) Login");
+        int ans = in.nextInt();
+
+        if (ans == 1) { 
+            addAccount();
+        } else if (ans == 2) { 
+            checkLogin();
+            chooseFromMenu();
+        } else { 
+            System.out.println("Option not found");
         }
     }
 
     public static void main(String [] args) {
-       /* Driver d = new Driver();
-        d.play();*/
-        
-        try
-        {
-            accessLevels = new ArrayList<String>();
-            users = new ArrayList<String>();
-            pass = new ArrayList<String>();
-            cases = new ArrayList<Case>();
-            addCredentials("admin","admin","admin");
-            loginFrame=new Login();
-            loginFrame.setSize(300,300);
-            loginFrame.setVisible(true);
-            loginFrame.logins();
-        }
-        catch(Exception e)
-        {
-            JOptionPane.showMessageDialog(null, e.getMessage());
-        }
+        Driver d = new Driver();
+        d.play();
     }
 }
 

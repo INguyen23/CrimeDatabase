@@ -9,46 +9,47 @@ import org.json.simple.JSONObject;
 
 public class DataWriter extends DataConstants {
     
-    public static void saveOfficers() {
-        Officers officers = Officers.getInstance();
-        ArrayList<Officer> o = officers.getOfficers();
-        JSONArray jsonO = new JSONArray();
+    public static void saveUsers() { 
+        Users users = Users.getInstance();
+        ArrayList<User> u = users.getUsers();
+        JSONArray jsonU = new JSONArray();
 
-        for(int i=0;i<o.size();i++) {
-            jsonO.add(getOfficerJSON(o.get(i)));
+        for(int i = 0; i < u.size(); i++) {
+            jsonU.add(getUserJSON(u.get(i)));
         }
 
-        try (FileWriter file = new FileWriter(OFFICER_FILE_NAME)) {
-            file.write(jsonO.toJSONString());
+        try(FileWriter file = new FileWriter(USER_FILE_NAME)) {
+            file.write(jsonU.toJSONString());
             file.flush();
         } catch (IOException e) {
             e.printStackTrace();
         }
     }
 
-    public static JSONObject getOfficerJSON(Officer officer) {
-        JSONObject officerDetails = new JSONObject();
-        officerDetails.put(OFFICER_ID, officer.getID());
-        officerDetails.put(OFFICER_USERNAME, officer.getUser());
-        officerDetails.put(OFFICER_PASSWORD, officer.getPass());
-        officerDetails.put(OFFICER_NAME, officer.getName());
-        officerDetails.put(OFFICER_AGE, officer.getAge());
-        officerDetails.put(OFFICER_BADGE_ID, officer.getBadgeID());
+    public static JSONObject getUserJSON(User user) { 
+        JSONObject userDetails = new JSONObject();
+        userDetails.put(USER_ID, user.getID());
+        userDetails.put(USER_USERNAME, user.getUser());
+        userDetails.put(USER_PASSWORD, user.getPass());
+        userDetails.put(USER_NAME, user.getName());
+        userDetails.put(USER_AGE, user.getAge());
+        userDetails.put(USER_BADGE_ID, user.getBadgeID());
 
-        return officerDetails;
+        return userDetails;
     }
 
 
-    public static void saveSuspects() { 
-        Suspects suspects = Suspects.getInstance();
-        ArrayList<Suspect> s = suspects.getSuspects();
+
+    public static void saveSubjects() { 
+        Subjects subjects = Subjects.getInstance();
+        ArrayList<Subject> s = subjects.getSubjects();
         JSONArray jsonS = new JSONArray();
 
         for(int i = 0; i < s.size(); i++) {
-            jsonS.add(getSuspectJSON(s.get(i)));
+            jsonS.add(getSubjectJSON(s.get(i)));
         }
 
-        try(FileWriter file = new FileWriter(SUS_FILE_NAME)) {
+        try(FileWriter file = new FileWriter(SUBJECT_FILE_NAME)) {
             file.write(jsonS.toJSONString());
             file.flush();
         } catch (IOException e) {
@@ -56,14 +57,17 @@ public class DataWriter extends DataConstants {
         }
     }
 
-    public static JSONObject getSuspectJSON(Suspect suspect) { 
+    public static JSONObject getSubjectJSON(Subject subject) { 
         JSONObject subjectDetails = new JSONObject();
-        subjectDetails.put(SUS_ID, suspect.getID());
-        subjectDetails.put(SUS_NAME, suspect.getName());
-        subjectDetails.put(SUS_AGE, suspect.getAge());
-        subjectDetails.put(SUS_SEX, suspect.getSex());
-        subjectDetails.put(SUS_WEIGHT, suspect.getWeight());
-        subjectDetails.put(SUS_DESCRIPTION, suspect.getDescription());
+        subjectDetails.put(SUBJECT_ID, subject.getID());
+        subjectDetails.put(SUBJECT_NAME, subject.getName());
+        subjectDetails.put(SUBJECT_AGE, subject.getAge());
+        subjectDetails.put(SUBJECT_SEX, subject.getSex());
+        subjectDetails.put(SUBJECT_WEIGHT, subject.getWeight());
+        subjectDetails.put(SUBJECT_HEIGHT, subject.getHeight());
+        subjectDetails.put(SUBJECT_EYECOLOR, subject.getEyeColor());
+        subjectDetails.put(SUBJECT_HAIRCOLOR, subject.getHairColor());
+        subjectDetails.put(SUBJECT_DESCRIPTION, subject.getDescription());
 
         return subjectDetails;
     }
@@ -89,7 +93,7 @@ public class DataWriter extends DataConstants {
 
     public static JSONObject getCaseJSON(Case case1) { 
         JSONObject caseDetails = new JSONObject();
-        caseDetails.put(CASE_ID, case1.getId());
+        caseDetails.put(CASE_NUMBER, case1.getCaseNum());
         caseDetails.put(CASE_LEVEL, case1.getLevel());
         caseDetails.put(CASE_DATE, case1.getDate());
         caseDetails.put(CASE_EVIDENCE, case1.getEvidence());

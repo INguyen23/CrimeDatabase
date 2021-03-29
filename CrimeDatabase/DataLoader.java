@@ -2,7 +2,6 @@ package CrimeDatabase;
 
 import java.io.FileReader;
 import java.util.ArrayList;
-import java.util.UUID;
 
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
@@ -10,37 +9,34 @@ import org.json.simple.parser.JSONParser;
 
 public class DataLoader extends DataConstants {
     
-    //load data for officer
-    public static ArrayList<Officer> loadOfficers() {
-        ArrayList<Officer> officers = new ArrayList<Officer>();
-        
-        try { 
-        FileReader reader = new FileReader(OFFICER_FILE_NAME);
-        JSONParser parser = new JSONParser();
-        JSONArray officersJSON = (JSONArray)new JSONParser().parse(reader);
+    public static ArrayList<User> loadUsers() {
+        ArrayList<User> users = new ArrayList<User>();
 
-        for (int i = 0 ; i < officersJSON.size(); i++) {
-            JSONObject officerJSON = (JSONObject)officersJSON.get(i);
-            int id = ((Long)officerJSON.get(OFFICER_ID)).intValue();
-            String userName = (String)officerJSON.get(OFFICER_USERNAME);
-            String password = (String)officerJSON.get(OFFICER_PASSWORD);
-            String name = (String)officerJSON.get(OFFICER_NAME);
-            int age = ((Long)officerJSON.get(OFFICER_AGE)).intValue();
-            String badgeID = (String)officerJSON.get(OFFICER_BADGE_ID);
+        try {
+            FileReader reader = new FileReader(USER_FILE_NAME);
+            JSONParser parser = new JSONParser();
+            JSONArray usersJSON = (JSONArray)new JSONParser().parse(reader);
 
-            officers.add(new Officer(id, userName, password, name, age, badgeID));
+            for (int i = 0; i < usersJSON.size(); i++) {
+                JSONObject userJSON = (JSONObject)usersJSON.get(i);
+                int ID = ((Long)userJSON.get(USER_ID)).intValue();
+                String userName = (String)userJSON.get(USER_USERNAME);
+                String pass = (String)userJSON.get(USER_PASSWORD);
+                String name = (String)userJSON.get(USER_NAME);
+                int age = ((Long)userJSON.get(USER_AGE)).intValue();
+                String badgeID = (String)userJSON.get(USER_BADGE_ID);
+
+                users.add(new User(ID, userName, pass, name, age, badgeID));
+            }
+
+            return users;
+        } catch (Exception e) {
+            e.printStackTrace();
         }
 
-        return officers;
-
-    } catch (Exception e) {
-        e.printStackTrace();
+        return null;
     }
 
-    return null;
-    }
-
-    //load data for case
     public static ArrayList<Case> loadCases() {
         ArrayList<Case> cases = new ArrayList<Case>();
 
@@ -51,15 +47,15 @@ public class DataLoader extends DataConstants {
 
             for (int i = 0; i < casesJSON.size(); i++) {
                 JSONObject caseJSON = (JSONObject)casesJSON.get(i);
-                int id = ((Long)caseJSON.get(CASE_ID)).intValue();
+                int caseNum = ((Long)caseJSON.get(CASE_NUMBER)).intValue();
                 String level = (String)caseJSON.get(CASE_LEVEL);
                 String date = (String)caseJSON.get(CASE_DATE);
-                String[] evidence = (String[])caseJSON.get(CASE_EVIDENCE);
-                String[] witnesses = (String[])caseJSON.get(CASE_WITNESSES);
-                String[] victimInfo = (String[])caseJSON.get(CASE_VICTIM_INFO);
+                String evidence = (String)caseJSON.get(CASE_EVIDENCE);
+                String witnesses = (String)caseJSON.get(CASE_WITNESSES);
+                String victimInfo = (String)caseJSON.get(CASE_VICTIM_INFO);
                 String description = (String)caseJSON.get(CASE_DESCRIPTION);
 
-                cases.add(new Case(id, level, date, evidence, witnesses, victimInfo, description));
+                cases.add(new Case(caseNum, level, date, evidence, witnesses, victimInfo, description));
             }
 
             return cases;
@@ -70,28 +66,30 @@ public class DataLoader extends DataConstants {
         return null;
     }
 
-    //load data for suspect
-    public static ArrayList<Suspect> loadSuspects() {
-        ArrayList<Suspect> suspects = new ArrayList<Suspect>();
+    public static ArrayList<Subject> loadSubjects() {
+        ArrayList<Subject> subjects = new ArrayList<Subject>();
 
         try {
-            FileReader reader = new FileReader(SUSPECT_FILE_NAME);
+            FileReader reader = new FileReader(SUBJECT_FILE_NAME);
             JSONParser parser = new JSONParser();
-            JSONArray suspectsJSON = (JSONArray)new JSONParser().parse(reader);
+            JSONArray subjectsJSON = (JSONArray)new JSONParser().parse(reader);
 
-            for (int i = 0; i < suspectsJSON.size(); i++) {
-                JSONObject suspectJSON = (JSONObject)suspectsJSON.get(i);
-                int ID = ((Long)suspectJSON.get(SUS_ID)).intValue();
-                String name = (String)suspectJSON.get(SUS_NAME);
-                int age = ((Long)suspectJSON.get(SUS_AGE)).intValue();
-                String sex = (String)suspectJSON.get(SUS_SEX);
-                int weight = ((Long)suspectJSON.get(SUS_WEIGHT)).intValue();
-                String[] description = (String[])suspectJSON.get(SUS_DESCRIPTION);
+            for (int i = 0; i < subjectsJSON.size(); i++) {
+                JSONObject subjectJSON = (JSONObject)subjectsJSON.get(i);
+                int ID = ((Long)subjectJSON.get(SUBJECT_ID)).intValue();
+                String name = (String)subjectJSON.get(SUBJECT_NAME);
+                int age = ((Long)subjectJSON.get(SUBJECT_AGE)).intValue();
+                String sex = (String)subjectJSON.get(SUBJECT_SEX);
+                int weight = ((Long)subjectJSON.get(SUBJECT_WEIGHT)).intValue();
+                String height = (String)subjectJSON.get(SUBJECT_HEIGHT);
+                String eyeColor = (String)subjectJSON.get(SUBJECT_EYECOLOR);
+                String hairColor = (String)subjectJSON.get(SUBJECT_HAIRCOLOR);
+                String description = (String)subjectJSON.get(SUBJECT_DESCRIPTION);
 
-                suspects.add(new Suspect(ID, name, age, sex, weight, description));
+                subjects.add(new Subject(ID, name, age, sex, weight, height, eyeColor, hairColor, description));
             }
 
-            return suspects;
+            return subjects;
         } catch (Exception e) {
             e.printStackTrace();
         }

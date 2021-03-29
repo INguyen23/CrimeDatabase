@@ -1,19 +1,25 @@
 package CrimeDatabase;
 
-public class Suspect {
+public class Subject {
     private int ID;
     private String name;
     private int age;
     private String sex;
     private int weight;
-    private String[] description;
+    private String height;
+    private String eyeColor;
+    private String hairColor;
+    private String description;
 
-    public Suspect(int ID, String name, int age, String sex, int weight, String[] description) {
+    public Subject(int ID, String name, int age, String sex, int weight, String height2, String eyeColor, String hairColor, String description) {
         this.ID = ID;
         this.name = name;
         this.age = age;
         this.sex = sex;
         this.weight = weight;
+        this.height = height2;
+        this.eyeColor = eyeColor;
+        this.hairColor = hairColor;
         this.description = description;
     }
 
@@ -57,11 +63,35 @@ public class Suspect {
         this.weight = weight;
     }
 
-    public String[] getDescription() {
+    public String getHeight() { 
+        return height;
+    }
+
+    public void setHeight(String height) { 
+        this.height = height;
+    }
+
+    public String getEyeColor() { 
+        return eyeColor;
+    }
+
+    public void setEyeColor(String eyeColor) { 
+        this.eyeColor = eyeColor;
+    }
+
+    public String getHairColor() { 
+        return hairColor;
+    }
+
+    public void setHairColor(String hairColor) {
+        this.hairColor = hairColor;
+    }
+
+    public String getDescription() {
         return description;
     }
 
-    public void setDescription(String[] description) { 
+    public void setDescription(String description) { 
         this.description = description;
     }
 }

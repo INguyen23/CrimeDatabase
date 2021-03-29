@@ -1,0 +1,43 @@
+[
+    {
+        "id":1,
+        "name":"Aizen",
+        "age":37,
+        "sex":"male",
+        "weight":147,
+        "height":"5'10",
+        "eyecolor":"brown",
+        "haircolor":"black",
+        "description":"wears hat"
+    },{
+        "id":2,
+        "name":"Jerry",
+        "age":25,
+        "sex":"male",
+        "weight":189,
+        "height":"6'3",
+        "eyecolor":"blue",
+        "haircolor":"blonde",
+        "description":"butterfly tattoo"
+    },{
+        "id":3,
+        "name":"Janie",
+        "age":57,
+        "sex":"female",
+        "weight":121,
+        "height":"5'4",
+        "eyecolor":"green",
+        "haircolor":"brown",
+        "description":"scar on left leg"
+    },{
+        "id":4,
+        "name":"Megan",
+        "age":44,
+        "sex":"female",
+        "weight":104,
+        "height":"5'4",
+        "eyecolor":"green",
+        "haircolor":"red",
+        "description":"dove tattoo"
+    }
+]

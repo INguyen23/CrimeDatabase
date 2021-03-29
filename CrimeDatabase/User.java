@@ -1,6 +1,6 @@
 package CrimeDatabase;
 
-public class Officer {
+public class User {
     private int ID;
     private String userName;
     private String pass;
@@ -8,7 +8,7 @@ public class Officer {
     private int age;
     private String badgeID;
 
-    public Officer(int ID, String userName, String pass, String name, int age, String badgeID) { 
+    public User(int ID, String userName, String pass, String name, int age, String badgeID) { 
         this.ID = ID;
         this.userName = userName;
         this.pass = pass;

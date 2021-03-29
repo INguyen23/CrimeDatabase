@@ -3,25 +3,25 @@
         "id":1,
         "level":"infraction",
         "date":"01/15/2020",
-        "evidence":["none"],
-        "witnesses":["Mary Jane, Steph Curry"],
-        "victimInfo":["none"],
+        "evidence":"none",
+        "witnesses":"Mary Jane, Steph Curry",
+        "victimInfo":"none",
         "description":"speeding 25+"
     },{
         "id":2,
         "level":"misdemeanor",
         "date":"07/25/2008",
-        "evidence":["fingerprints"],
-        "witnesses":["John Meyer"],
-        "victimInfo":["none"],
+        "evidence":"fingerprints",
+        "witnesses":"John Meyer",
+        "victimInfo":"none",
         "description":"vandalism"
     },{
         "id":3,
         "level":"felony",
         "date":"11/30/2010",
-        "evidence":["knife, fingerprints"],
-        "witnesses":["John Cena, Jerry Allen"],
-        "victimInfo":["Marry Anne, female, blonde hair, blue eyes"],
+        "evidence":"knife, fingerprints",
+        "witnesses":"John Cena, Jerry Allen",
+        "victimInfo":"Marry Anne, female, blonde hair, blue eyes",
         "description":"Murder"
     }
 ]
